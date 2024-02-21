@@ -40,4 +40,4 @@ jobs:
         python -m pip install -r requirements.txt
     - name: Run unit tests
       run: | 
-        pytest src/model/
+        pytest tests/
