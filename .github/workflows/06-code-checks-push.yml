@@ -1,4 +1,4 @@
-name: Pull Request Merged
+name: Code checks Push
 
 on:
   workflow_dispatch:
