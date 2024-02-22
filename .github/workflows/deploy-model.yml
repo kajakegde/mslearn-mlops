@@ -1,0 +1,34 @@
+name: Deploy latest version of model
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy-model:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Check out repo
+      uses: actions/checkout@main
+      
+    - name: Install az ml extension
+      run: az extension add -n ml -y
+      
+    - name: Azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS}}
+        
+    - name: Get latest version of registered model
+      run: |
+        model_version=$(az ml model list-versions --model-name diabetes-prod-log-regression --query "[?deployTime].version" -o tsv | sort -r | head -n 1)
+        echo "::set-output name=model_version::$model_version"
+
+    - name: Create endpoint
+      run: |
+        endpoint_name="diabetes-endpoint"
+        az ml endpoint create --name $endpoint_name --model diabetes-prod-log-regression:$model_version --compute aml-compute --auto-update true
+
+    - name: Deploy model to endpoint
+      run: |
+        az ml endpoint update -n $endpoint_name --query endpoint.status -o tsv
