@@ -7,6 +7,7 @@ jobs:
   job1:
     name: train-dev-data
     runs-on: ubuntu-latest
+    environment: dev
     
     steps:
     - name: Check out repo
@@ -30,6 +31,7 @@ jobs:
   job2:
     name: train-prod-data
     runs-on: ubuntu-latest
+    environment: prod
     needs: job1
     if: ${{ success() }}
 
