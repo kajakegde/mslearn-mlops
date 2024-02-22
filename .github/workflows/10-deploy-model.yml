@@ -26,7 +26,7 @@ jobs:
 
     - name: Create endpoint
       run: |
-        endpoint_name="diabetes-endpoint"
+        endpoint_name=diabetes-endpoint
         az ml online-endpoint create --name $endpoint_name --model diabetes-prod-log-regression:$model_version --compute aml-compute --resource-group rg-dp100-MLOps --workspace-name mlw-dp100-MLOps --auto-update true
 
     - name: Deploy model to endpoint
