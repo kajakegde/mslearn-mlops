@@ -21,7 +21,7 @@ jobs:
         
     - name: Get latest version of registered model
       run: |
-        model_version=$(az ml model list-versions --model-name diabetes-prod-log-regression --query "[?deployTime].version" -o tsv | sort -r | head -n 1)
+        model_version=$(az ml model list --latest -l --model-name diabetes-prod-log-regression --resource-group rg-dp100-MLOps --workspace-name mlw-dp100-MLOps -o tsv | sort -r | head -n 1)
         echo "::set-output name=model_version::$model_version"
 
     - name: Create endpoint
