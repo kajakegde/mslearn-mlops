@@ -11,5 +11,5 @@ inputs:
   reg_rate: 0.01
 environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
 compute: azureml:aml-compute
-experiment_name: train-diabetes-dev
+experiment_name: train-diabetes-MLOps-challenge
 description: train the model using data from dev 
