@@ -18,16 +18,11 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{secrets.AZURE_CREDENTIALS}}
-        
-    - name: Get latest version of registered model
-      run: |
-        model_version=$(az ml model list --name diabetes-prod-log-regression --resource-group rg-dp100-MLOps --workspace-name mlw-dp100-MLOps --query "sort_by([].properties.version, &)[-1]" --output tsv)
-        echo "::set-output name=model_version::$model_version"
 
     - name: Create endpoint
       run: |
         endpoint_name=diabetes-endpoint
-        az ml online-endpoint create --name $endpoint_name --model diabetes-prod-log-regression:$model_version --compute aml-compute --resource-group rg-dp100-MLOps --workspace-name mlw-dp100-MLOps --auto-update true
+        az ml online-endpoint create --name $endpoint_name --model diabetes-prod-log-regression:1 --compute aml-compute --resource-group rg-dp100-MLOps --workspace-name mlw-dp100-MLOps --auto-update true
 
     - name: Deploy model to endpoint
       run: |
