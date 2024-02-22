@@ -27,8 +27,8 @@ jobs:
     - name: Create endpoint
       run: |
         endpoint_name="diabetes-endpoint"
-        az ml endpoint create --name $endpoint_name --model diabetes-prod-log-regression:$model_version --compute aml-compute --auto-update true
+        az ml real-time-endpoint create --name $endpoint_name --model diabetes-prod-log-regression:$model_version --compute aml-compute --auto-update true
 
     - name: Deploy model to endpoint
       run: |
-        az ml endpoint update -n $endpoint_name --query endpoint.status -o tsv
+        az ml real-time-endpoint update -n $endpoint_name --query endpoint.status -o tsv
