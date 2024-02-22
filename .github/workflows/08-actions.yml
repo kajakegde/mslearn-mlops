@@ -23,7 +23,7 @@ jobs:
 
     - name: Trigger Azure Machine Learning job
       run: |
-        az ml job create --file src/job_dev.yml --resource-group rg-dp100-labs --workspace-name mlw-dp100-MLOps
+        az ml job create --file src/job_dev.yml --resource-group rg-dp100-MLOps --workspace-name mlw-dp100-MLOps
 
     - name: Echo
       run: echo "train-dev-data ran successfully"
@@ -49,7 +49,7 @@ jobs:
 
     - name: Trigger Azure Machine Learning job
       run: |
-        az ml job create --file src/job_prod.yml --resource-group rg-dp100-labs --workspace-name mlw-dp100-MLOps --stream
+        az ml job create --file src/job_prod.yml --resource-group rg-dp100-MLOps --workspace-name mlw-dp100-MLOps --stream
 
     - name: Echo
       run: echo "train-prod-data ran successfully"
