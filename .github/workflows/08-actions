@@ -1,4 +1,4 @@
-name: dev and prod training
+name: actions
 
 on:
   push:
